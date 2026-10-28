@@ -1,6 +1,5 @@
 package com.therapist.assistant.viewmodel
 
-import androidx.lifecycle.ViewModel
 import com.therapist.assistant.domain.ClientFilters
 import com.therapist.assistant.domain.FinanceAnalytics
 import com.therapist.assistant.domain.SmartReminder
@@ -10,15 +9,15 @@ import com.therapist.assistant.domain.SmartReminder
  * این کلاس‌ها مسیر مهاجرت تدریجی به چند ViewModel را باز می‌کنند.
  */
 class ClientsLogic {
-    fun filter = ClientFilters
+    val filter: ClientFilters = ClientFilters()
 }
 
 class FinanceLogic {
-    fun analytics = FinanceAnalytics
+    val analytics: FinanceAnalytics = FinanceAnalytics()
 }
 
 class ReminderLogic {
-    fun smart = SmartReminder
+    val smart: SmartReminder = SmartReminder()
 }
 
 /** نشانگر نقش منشی برای UI */
