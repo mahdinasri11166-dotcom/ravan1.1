@@ -18,6 +18,7 @@ jobs:
           java-version: '17'
           cache: gradle
 
+      
       - name: Setup Android SDK & Accept Licenses
         env:
           ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
@@ -26,6 +27,7 @@ jobs:
           export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
           yes | sdkmanager --licenses >/dev/null 2>&1 || true
           sdkmanager "platforms;android-35" "build-tools;35.0.0" "platform-tools" || true
+      
 
       - run: chmod +x gradlew
 
@@ -37,6 +39,9 @@ jobs:
             echo "$KEYSTORE_BASE64" | base64 -d > app/darmanagarno-release.jks
           fi
           test -f app/darmanagarno-release.jks
+
+      - name: Unit tests / smoke (must pass)
+        run: ./gradlew testDebugUnitTest --info --stacktrace
 
       - name: Lint
         run: ./gradlew lintDebug --stacktrace || true
